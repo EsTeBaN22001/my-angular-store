@@ -1,0 +1,32 @@
+.info-container{
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .2rem;
+
+  .info-content{
+    font-size: 1rem;
+    
+    h2{
+      font-weight: bold;
+    }
+    
+    p{
+      color: gray;
+    }
+  }
+
+  .add-to-cart-button{
+    all: unset;
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
+}
+.button-link{
+  text-decoration: none;
+  text-align: center;
+}

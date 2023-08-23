@@ -1,0 +1,34 @@
+<button (click)="createNewProduct()">Create product</button>
+<p>Cantidad de productos en mi carrito de compras: {{myShoppingCart.length}}</p>
+<p>Total ${{total}}</p>
+<div class="products--grid">
+  <app-product
+    [product]="product"
+    (addedProduct)="onAddToShoppingCart($event)"
+    (showDetail)="onShowDetail($event)"
+    *ngFor="let product of products"
+  ></app-product>
+</div>
+<button (click)="onLoadMore()" class="button width-20 load-more-button">Load More</button>
+<div *ngIf="productChosen" class="product-detail" [class.active]="showProductDetail">
+  <button (click)="toggleProductDetail()" class="close-button">x</button>
+
+  <!-- <img class="product-img" [src]="productChosen.images[0]" [alt]="productChosen.title"> -->
+
+  <swiper [slidesPerView]="1">
+    <ng-template swiperSlide *ngFor="let img of productChosen.images">
+      <app-img class="height-40" [img]="img"></app-img>
+    </ng-template>
+  </swiper>
+
+  <div class="detail-content">
+    <h2>${{ productChosen.price }}</h2>
+    <p>{{ productChosen.title }}</p>
+    <p>{{ productChosen.description }}</p>
+    <button class="button" (click)="updateProduct()">Editar</button>
+    <button class="button" (click)="deleteProduct()">Eliminar</button>
+  </div>
+
+  <button class="add-to-cart-button"><img src="./assets/svg/bt_add_to_cart.svg" alt="">Añadir al carrito</button>
+  
+</div>
