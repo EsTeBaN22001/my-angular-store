@@ -1,0 +1,115 @@
+<h1>Curso de formularios reactivos con angular</h1>
+
+<br>
+<hr>
+<br>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+
+  <p>
+    Name: {{ nameField?.valid }}
+    <input 
+      [class.is-valid]="validInput('name')"
+      [class.is-invalid]="invalidInput('name')"
+      type="text"
+      formControlName="name"
+    >
+    <button [disabled]="nameField?.invalid" (click)="getNameValue()">Get value</button>
+  </p>
+
+  <div class="messages" [class.active]="invalidInput('name')">
+    <p>
+      <strong *ngIf="nameField?.hasError('required')">Este campo es requerido</strong>
+    </p>
+    <p>
+      <strong *ngIf="nameField?.hasError('maxlength')">Debe tener máximo 10 caracteres</strong>
+    </p>  
+    <p>
+      <strong *ngIf="nameField?.hasError('pattern')">NO debe tener caracteres especiales</strong>
+    </p>
+  </div>
+
+  <p>
+    Email: {{ emailField?.value }}
+    <input 
+      [class.is-valid]="validInput('email')"
+      [class.is-invalid]="invalidInput('email')"
+      type="email" 
+      formControlName="email"
+      >
+    <button (click)="getEmailValue()">Get value</button>
+  </p>
+
+  <div class="messages" [class.active]="invalidInput('email')">
+    <p>
+      <strong *ngIf="emailField?.hasError('required')">Este campo es requerido</strong>
+    </p>  
+    <p>
+      <strong *ngIf="emailField?.hasError('email')">No es un email válido</strong>
+    </p>  
+  </div>
+
+  <p>
+    Category: {{categoryField?.value}}
+    <select formControlName="category">
+      <option value="category-1">Categoría 1</option>
+      <option value="category-2">Categoría 2</option>
+      <option value="category-3">Categoría 3</option>
+    </select>
+  </p>
+
+  <p>
+    Tags: {{tagField?.value}}
+    <select formControlName="tag" multiple>
+      <option value="tag-1">Tag 1</option>
+      <option value="tag-2">Tag 2</option>
+      <option value="tag-3">Tag 3</option>
+    </select>
+  </p>
+
+  <p>
+    Agree: {{agreeField?.value}}
+    <input type="checkbox" formControlName="agree">
+  </p>
+
+  <p>
+    Gender: {{genderField?.value}}
+    <label>
+      <input type="radio" name="gender" value="male" formControlName="gender">
+      Male
+    </label>
+    <label>
+      <input type="radio" name="gender" value="female" formControlName="gender">
+      Female
+    </label>
+    <label>
+      <input type="radio" name="gender" value="other" formControlName="gender">
+      Other
+    </label>
+  </p>
+
+  <p>
+    Zone: {{zoneField?.value}}
+    <label>
+      <input type="radio" name="zone" value="zone-1" formControlName="zone">
+      Zone 1
+    </label>
+    <label>
+      <input type="radio" name="zone" value="zone-2" formControlName="zone">
+      Zone 2
+    </label>
+    <label>
+      <input type="radio" name="zone" value="zone-3" formControlName="zone">
+      Zone 3
+    </label>
+  </p>
+
+  <p>
+    <button type="submit">Enviar</button>
+  </p>
+
+</form>
+
+<br>
+<hr>
+<br>

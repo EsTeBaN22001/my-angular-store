@@ -21,7 +21,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    QuicklinkModule
+    QuicklinkModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TimeInterceptor, multi: true },

@@ -33,11 +33,21 @@
     </nav>
     <div class="info">
       <div class="account">
-        <button *ngIf="!profile; else elseBlock" (click)="login()" class="button">Login</button>
+        
+        <a routerLink="/login" class="button" *ngIf="!profile; else elseBlock">Login</a>
+
         <ng-template #elseBlock>
           <a routerLink="/profile">{{ profile?.email }}</a>
           <button (click)="logout()">Logout</button>
         </ng-template>
+        
+        <!-- <ng-template *ngIf="profile !== null; else elseBlock">
+          <a routerLink="/profile">{{ profile.email }}</a>
+          <button (click)="logout()">Logout</button>
+        </ng-template>
+        <ng-template #elseBlock>
+          <a routerLink="/login" class="button">Login</a>
+        </ng-template> -->
       </div>
       <div class="shopping-cart">
         <a href="#">

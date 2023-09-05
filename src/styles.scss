@@ -10,6 +10,51 @@
 
 *{
   font-family: 'Quicksand', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Clases globales reutilizables
+.container{
+  width: 90%;
+  margin: 0 auto;
+}
+
+.container-sm{
+  width: 70%;
+  margin: 0 auto;
+}
+
+.container-usm{
+  width: 50%;
+  margin: 0rem auto;
+}
+
+// Estilos globales para la validación de los inputs
+input{
+  &.is-valid{
+    border: 2px solid green !important;
+  }
+
+  &.is-invalid{
+    border: 2px solid red !important;
+  }
+}
+
+.messages{
+  opacity: 0;
+  height: 0;
+  transition: all .3s ease;
+
+  span{
+    color: red;
+  }
+
+  &.active{
+    opacity: 1;
+    height: auto;
+  }
 }
 
 .products--grid{

@@ -46,12 +46,12 @@ export class ProductsService {
     .pipe(
       catchError((error: HttpErrorResponse) => {
         if(error.status == 500){
-          return throwError('Ups... Algo salió mal en el servidor')
+          return throwError(() => 'Ups... Algo salió mal en el servidor')
         }
         if(error.status == 404){
-          return throwError('Ups... El producto no existe')
+          return throwError(() => 'Ups... El producto no existe')
         }
-        return throwError('Ups... algo salió mal')
+        return throwError(() => 'Ups... algo salió mal')
       })
     )
   }

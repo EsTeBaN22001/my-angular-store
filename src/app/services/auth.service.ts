@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Auth } from '../models/auth.model';
 import { User } from '../models/user.model';
 import { TokenService } from './token.service';
-import { tap, switchMap, BehaviorSubject } from 'rxjs';
+import { tap, switchMap, BehaviorSubject, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -26,14 +26,26 @@ export class AuthService {
   login(email: string, password: string){
     return this.http.post<Auth>(`${this.apiUrl}/login`, {email, password})
     .pipe(
-      tap( response => { this.tokenService.saveToken(response.access_token) } )
+      tap( response => { this.tokenService.saveToken(response.access_token) } ),
+      catchError( (err: HttpErrorResponse) => {
+
+        if(err.status == 401){
+          return throwError(() => 'El usuario no existe o las credenciales son incorrectas...')
+        }
+
+        return throwError(() => 'Hubo algún problema al iniciar sesión')
+
+      })
     )
   }
 
   profile(){
     return this.http.get<User>(`${this.apiUrl}/profile`)
     .pipe(
-      tap( user => this.user.next(user))
+      tap( user => {
+        console.log('Usuario actualizado: ', user)
+        this.user.next(user)
+      })
     )
   }
 
