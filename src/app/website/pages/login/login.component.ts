@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { customValidators } from './../../../validators/custom-validators'
 import { AuthService } from './../../../services/auth.service'
 import Swal from 'sweetalert2'
 
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2'
 export class LoginComponent {
 
   form: FormGroup = new FormGroup({})
+  customValidators = customValidators
 
   constructor(
     private formBuilder: FormBuilder,
@@ -19,15 +21,6 @@ export class LoginComponent {
     private router: Router
   ){
     this.buildForm()
-  }
-
-  // Funciones para validar si un input es correcto o incorrecto
-  validInput(input: string){
-    return this.form.get(input)?.touched && this.form.get(input)?.valid
-  }
-
-  invalidInput(input: string){
-    return this.form.get(input)?.touched && this.form.get(input)?.invalid
   }
 
   // Getters para los inputs del formulario

@@ -4,14 +4,14 @@
   <div class="form-group">
     <label for="email">Email:</label>
     <input 
-      [class.is-valid]="validInput('email')"
-      [class.is-invalid]="invalidInput('email')"
+      [class.is-valid]="customValidators.validInput('email', form)"
+      [class.is-invalid]="customValidators.invalidInput('email', form)"
       type="email" 
       id="email" 
       placeholder="Ingrese su email"
       formControlName="email"
     >
-    <div class="messages" [class.active]="invalidInput('email')">
+    <div class="messages" [class.active]="customValidators.invalidInput('email', form)">
       <p>
         <strong *ngIf="emailField?.hasError('required')"><span>*</span> Este campo es requerido</strong>
       </p>
@@ -24,14 +24,14 @@
   <div class="form-group">
     <label for="password">Contraseña:</label>
     <input 
-      [class.is-valid]="validInput('password')"
-      [class.is-invalid]="invalidInput('password')"
+      [class.is-valid]="customValidators.validInput('password', form)"
+      [class.is-invalid]="customValidators.invalidInput('password', form)"
       id="password" 
       type="password" 
       placeholder="Ingrese su contraseña"
       formControlName="password"
     >
-    <div class="messages" [class.active]="invalidInput('password')">
+    <div class="messages" [class.active]="customValidators.invalidInput('password', form)">
       <p>
         <strong *ngIf="passwordField?.hasError('required')"><span>*</span> Este campo es requerido</strong>
       </p>
@@ -46,6 +46,10 @@
 
   <div class="form-group">
     <button  class="button-inverted width-100 button-submit" type="submit">Iniciar sesión</button>
+  </div>
+
+  <div class="form-group">
+    <p>¿No tienes cuenta? <a routerLink="/register">Registrate</a></p>
   </div>
   
 </form>

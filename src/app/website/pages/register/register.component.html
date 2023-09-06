@@ -1,1 +1,85 @@
-<p>Página register</p>
+<form [formGroup]="form" (ngSubmit)="register()" class="container-usm form">
+  <h1>Registro</h1>
+
+  <div class="form-group">
+    <label for="name">Nombre:</label>
+    <input
+      [class.is-valid]="customValidators.validInput('name', form)"
+      [class.is-invalid]="customValidators.invalidInput('name', form)"
+      type="text" 
+      id="name"
+      placeholder="Ingrese su nombre"
+      formControlName="name"
+    >
+    <div class="messages" [class.active]="customValidators.invalidInput('name', form)">
+      <p>
+        <strong *ngIf="nameField?.hasError('required')"><span>*</span> Este campo es requerido</strong>
+      </p>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input 
+      [class.is-valid]="customValidators.validInput('email', form)"
+      [class.is-invalid]="customValidators.invalidInput('email', form)"
+      type="email" 
+      id="email" 
+      placeholder="Ingrese su email"
+      formControlName="email"
+    >
+    <div class="messages" [class.active]="customValidators.invalidInput('email', form)">
+      <p>
+        <strong *ngIf="emailField?.hasError('required')"><span>*</span> Este campo es requerido</strong>
+      </p>
+      <p>
+        <strong *ngIf="emailField?.hasError('email')"><span>*</span> El email es inválido</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Contraseña:</label>
+    <input 
+      [class.is-valid]="customValidators.validInput('password', form)"
+      [class.is-invalid]="customValidators.invalidInput('password', form)"
+      id="password" 
+      type="password" 
+      placeholder="Ingrese su contraseña"
+      formControlName="password"
+    >
+    <div class="messages" [class.active]="customValidators.invalidInput('password', form)">
+      <p>
+        <strong *ngIf="passwordField?.hasError('required')"><span>*</span> Este campo es requerido</strong>
+      </p>
+      <p>
+        <strong *ngIf="passwordField?.hasError('minlength')"><span>*</span> Mínimo 4 caracteres</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="confirmPassword">Confirmar contraseña:</label>
+    <input 
+      [class.is-valid]="customValidators.validInput('confirmPassword', form) && !form.hasError('match_password')"
+      [class.is-invalid]="customValidators.invalidInput('confirmPassword', form) || form.hasError('match_password')"
+      id="confirmPassword" 
+      type="password" 
+      placeholder="Ingrese su contraseña"
+      formControlName="confirmPassword"
+    >
+    <div class="messages" [class.active]="customValidators.invalidInput('confirmPassword', form) || form.errors">
+      <p>
+        <strong *ngIf="confirmPasswordField?.hasError('required')"><span>*</span> Este campo es requerido</strong>
+      </p>
+      <p>
+        <strong *ngIf="form.hasError('match_password')"><span>*</span> Las contraseñas no coinciden</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button  class="button-inverted width-100 button-submit" type="submit">Registrarse</button>
+  </div>
+  
+</form>
